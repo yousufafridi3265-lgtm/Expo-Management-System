@@ -16,7 +16,7 @@ const connectDB = async () => {
       throw new Error("MONGO_URI environment variable is missing");
     }
 
-    await mongoose.connect(uri, {serverSelectionTimeoutMS: 500});
+    await mongoose.connect(uri, {serverSelectionTimeoutMS: 1000});
 
     console.log(`MongoDB connected Successfully.`);
   } catch (error) {
