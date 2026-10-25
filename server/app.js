@@ -25,6 +25,12 @@ app.get("/api/health", (req, res) => {
   res.json({ status: "ok", message: "Expo Management API is running" });
 });
 
+app.get("/", (req, res) => {
+  res.status(200).json({
+    message: "Backend is running successfully"
+  });
+});
+
 // Sirf logos public hain. Documents (baad mein) is folder se alag rahenge
 app.use("/uploads/logos", express.static(LOGOS_DIR));
 

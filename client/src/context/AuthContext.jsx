@@ -53,9 +53,26 @@ export const AuthProvider = ({ children }) => {
     saveSession(response.data, setUser);
   };
 
-  const register = async (details) => {
+    // Exhibitor ko company profile bhi banana hota hai. Is liye createProfile (optional) function milta hai.
+  // Pehle account banta hai, phir profile. Profile fail ho to account phir bhi bana rehta hai,
+  // is liye us ka error throw nahi karte, wapas bhej dete hain
+  const register = async (details, createProfile) => {
     const response = await registerUser(details);
-    saveSession(response.data, setUser);
+    // Token pehle save karte hain, taake profile wali request authorized ho
+    localStorage.setItem(TOKEN_KEY, response.data.token);
+
+    let profileError = null;
+    if (createProfile) {
+      try {
+        await createProfile();
+      } catch (error) {
+        profileError = error;
+      }
+    }
+
+    // User ab set hota hai (is se GuestRoute dashboard par bhej deta hai)
+    setUser(response.data.user);
+    return { profileError };
   };
 
   const logout = useCallback(() => {

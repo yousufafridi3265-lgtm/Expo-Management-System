@@ -59,9 +59,8 @@
     background-color: var(--neutral-bg);
     color: var(--neutral-text);
   }
-}
 
-  .btn-icon {
+ .btn-icon {
     @apply p-2;
   }
 
@@ -163,3 +162,57 @@
   .link {
     @apply font-medium text-brand hover:underline;
   }
+
+
+    /* ---------- Form ke layout helpers ---------- */
+  .form-grid {
+    @apply grid gap-4 sm:grid-cols-2;
+  }
+  .form-grid-wide {
+    @apply sm:col-span-2;
+  }
+  .form-section-title {
+    @apply border-t border-line pt-4 text-base font-semibold text-fg;
+  }
+  .form-note {
+    @apply text-xs text-muted;
+  }
+
+  /* ---------- Navbar ---------- */
+  .navbar {
+    @apply sticky top-0 z-40 border-b border-line bg-card;
+  }
+  .navbar-inner {
+    @apply mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3;
+  }
+  .navbar-brand {
+    @apply flex items-center gap-2 text-lg font-bold text-fg;
+  }
+  .navbar-logo {
+    @apply h-8 w-8 object-contain;
+  }
+  .navbar-desktop {
+    @apply hidden items-center gap-2 md:flex;
+  }
+  .navbar-mobile-controls {
+    @apply flex items-center gap-1 md:hidden;
+  }
+  .navbar-mobile-menu {
+    @apply flex flex-col gap-2 border-t border-line px-4 py-3 md:hidden;
+  }
+
+  /* ---------- Footer ---------- */
+  .footer {
+    @apply border-t border-line bg-card;
+  }
+  .footer-inner {
+    @apply mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-4 py-6 text-sm text-muted sm:flex-row;
+  }
+  .footer-links {
+    @apply flex gap-4;
+  }
+
+  
+}
+
+ 

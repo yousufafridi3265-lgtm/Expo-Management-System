@@ -62,6 +62,9 @@
   .auth-card {
     @apply w-full max-w-md;
   }
+  .auth-card-wide {
+    @apply max-w-2xl;
+  }
   .auth-title {
     @apply text-2xl font-bold text-fg;
   }
@@ -74,5 +77,56 @@
   .auth-footer {
     @apply mt-6 text-center text-sm text-muted;
   }
-}
+    /* ---------- Public site ka dhancha ---------- */
+  .site-shell {
+    @apply flex min-h-screen flex-col bg-page text-fg;
+  }
+  .site-main {
+    @apply flex-1;
+  }
 
+  /* ---------- Home page ---------- */
+  .hero {
+    @apply mx-auto flex max-w-3xl flex-col items-center gap-6 px-4 py-16 text-center sm:py-24;
+  }
+  .hero-title {
+    @apply text-3xl font-bold text-fg sm:text-5xl;
+  }
+  .hero-text {
+    @apply text-base text-muted sm:text-lg;
+  }
+  .hero-actions {
+    @apply flex flex-wrap justify-center gap-3;
+  }
+  .home-section {
+    @apply mx-auto max-w-6xl px-4 py-10 text-center;
+  }
+  .home-section-title {
+    @apply mb-4 text-2xl font-bold text-fg;
+  }
+  .home-section-text {
+    @apply mx-auto max-w-2xl text-muted;
+  }
+  .feature-grid {
+    @apply mt-6 grid gap-4 text-left sm:grid-cols-2 lg:grid-cols-3;
+  }
+  .feature-card {
+    @apply flex flex-col gap-2;
+  }
+  .feature-icon {
+    @apply h-7 w-7 text-brand;
+  }
+  .feature-title {
+    @apply text-lg font-semibold text-fg;
+  }
+  .feature-text {
+    @apply text-sm text-muted;
+  }
+  .role-list {
+    @apply list-disc space-y-1 pl-5 text-sm text-muted;
+  }
+  .cta-band {
+    @apply mx-auto my-10 flex max-w-4xl flex-col items-center gap-4 rounded-xl border border-line bg-card px-4 py-10 text-center;
+  }
+  
+}
