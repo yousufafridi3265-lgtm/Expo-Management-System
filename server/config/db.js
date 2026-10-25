@@ -9,7 +9,6 @@ env.config()
 // MongoDB se connection ek hi jagah par banta hai
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGO_URI);
 
     const uri = process.env.MONGO_URI;
 

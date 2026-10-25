@@ -7,7 +7,12 @@ env.config();
 
 const PORT = process.env.PORT || 5000;
 
-await connectDB();
+try {
+  await connectDB();
+} catch (error) {
+  console.error("DATABASE STARTUP ERROR:", error);
+  throw error;
+}
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
