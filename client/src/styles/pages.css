@@ -1,0 +1,78 @@
+/* Pages ke shared styles */
+@layer components {
+  /* ---------- Temporary preview page (agle step mein hat jaye ga) ---------- */
+  .preview-page {
+    @apply min-h-screen bg-page text-fg;
+  }
+  .preview-header {
+    @apply border-b border-line bg-card;
+  }
+  .preview-header-inner {
+    @apply mx-auto flex max-w-4xl items-center justify-between p-4;
+  }
+  .preview-brand {
+    @apply font-bold;
+  }
+  .preview-main {
+    @apply mx-auto max-w-4xl space-y-6 p-4 sm:p-6;
+  }
+  .preview-section-title {
+    @apply mb-3 font-semibold;
+  }
+  .preview-form {
+    @apply grid gap-4 sm:grid-cols-2;
+  }
+  .preview-form-wide {
+    @apply sm:col-span-2;
+  }
+  .preview-form-actions {
+    @apply flex flex-wrap gap-2 sm:col-span-2;
+  }
+  .preview-badges {
+    @apply flex flex-wrap gap-2;
+  }
+  .preview-note {
+    @apply mb-4 text-sm text-muted;
+  }
+}
+
+/* Pages ke shared styles */
+@layer components {
+  /* ---------- Aam page ---------- */
+  .page-container {
+    @apply mx-auto max-w-4xl p-4 sm:p-6;
+  }
+
+  /* ---------- Login / Register (AuthLayout) ---------- */
+  .auth-page {
+    @apply relative flex min-h-screen flex-col items-center justify-center bg-page p-4;
+  }
+  .auth-theme-toggle {
+    @apply absolute right-4 top-4;
+  }
+  .auth-brand {
+    @apply mb-6 flex items-center gap-3;
+  }
+  .auth-logo {
+    @apply h-10 w-10 object-contain;
+  }
+  .auth-brand-name {
+    @apply text-xl font-bold text-fg;
+  }
+  .auth-card {
+    @apply w-full max-w-md;
+  }
+  .auth-title {
+    @apply text-2xl font-bold text-fg;
+  }
+  .auth-subtitle {
+    @apply mt-1 text-sm text-muted;
+  }
+  .auth-form {
+    @apply mt-6 flex flex-col gap-4;
+  }
+  .auth-footer {
+    @apply mt-6 text-center text-sm text-muted;
+  }
+}
+

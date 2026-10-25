@@ -1,0 +1,165 @@
+/* Reusable component styles. Yeh file index.css se import hoti hai, isliye @apply yahan chalta hai.
+   @layer components ki wajah se zaroorat par Tailwind class (jaise p-2) in ko override kar sakti hai */
+@layer components {
+  /* ---------- Button ---------- */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
+    @apply disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .btn-primary {
+    @apply bg-brand text-on-brand hover:bg-brand-hover;
+  }
+  .btn-secondary {
+    @apply border border-line bg-card text-fg hover:bg-page;
+  }
+  .btn-danger {
+    @apply bg-danger text-on-brand hover:bg-danger-hover;
+  }
+  .btn-ghost {
+    @apply text-fg hover:bg-page;
+  }
+
+  /* ---------- Form fields (Input, Select, Textarea) ---------- */
+  .field {
+    @apply w-full rounded-lg border border-line bg-input px-3 py-2 text-sm text-fg;
+    @apply placeholder:text-muted focus:border-brand focus:outline-2 focus:outline-brand;
+    @apply disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .field-error {
+    @apply border-danger;
+  }
+
+  /* ---------- Card ---------- */
+  .card {
+    @apply rounded-xl border border-line bg-card p-4 shadow-sm sm:p-6;
+  }
+
+  /* ---------- Status badge ---------- */
+  .badge {
+    @apply inline-block rounded-full px-2.5 py-0.5 text-xs font-medium capitalize;
+  }
+  .badge-success {
+    background-color: var(--success-bg);
+    color: var(--success-text);
+  }
+  .badge-warning {
+    background-color: var(--warning-bg);
+    color: var(--warning-text);
+  }
+  .badge-danger {
+    background-color: var(--danger-bg);
+    color: var(--danger-text);
+  }
+  .badge-info {
+    background-color: var(--info-bg);
+    color: var(--info-text);
+  }
+  .badge-neutral {
+    background-color: var(--neutral-bg);
+    color: var(--neutral-text);
+  }
+}
+
+  .btn-icon {
+    @apply p-2;
+  }
+
+  /* ---------- Spinner (button ke andar chhota gol) ---------- */
+  .spinner {
+    @apply h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent;
+  }
+
+  /* ---------- PageLoader (logo ghoomta hai) ---------- */
+  .page-loader {
+    @apply flex min-h-[50vh] flex-col items-center justify-center gap-4 text-muted;
+  }
+  .page-loader-full {
+    @apply min-h-screen;
+  }
+  .page-loader-logo {
+    @apply h-16 w-16 animate-spin object-contain motion-reduce:animate-pulse;
+  }
+  .page-loader-text {
+    @apply text-sm;
+  }
+
+  /* ---------- EmptyState (card ke saath lagta hai: "card empty-state") ---------- */
+  .empty-state {
+    @apply flex flex-col items-center gap-2 py-10 text-center;
+  }
+  .empty-state-icon {
+    @apply h-10 w-10 text-muted;
+  }
+  .empty-state-title {
+    @apply text-lg font-semibold text-fg;
+  }
+  .empty-state-message {
+    @apply max-w-md text-sm text-muted;
+  }
+  .empty-state-action {
+    @apply mt-3;
+  }
+
+  /* ---------- ErrorMessage ---------- */
+  .error-message {
+    @apply flex flex-col items-center gap-3 rounded-xl border border-line bg-card p-6 text-center;
+  }
+  .error-message-icon {
+    @apply h-8 w-8 text-danger;
+  }
+  .error-message-text {
+    @apply text-sm text-danger;
+  }
+
+  /* ---------- PageHeader ---------- */
+  .page-header {
+    @apply mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between;
+  }
+  .page-header-title {
+    @apply text-2xl font-bold text-fg;
+  }
+  .page-header-subtitle {
+    @apply mt-1 text-sm text-muted;
+  }
+  .page-header-actions {
+    @apply flex flex-wrap gap-2;
+  }
+
+  /* ---------- Modal aur ConfirmationDialog ---------- */
+  .modal-backdrop {
+    @apply fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4;
+  }
+  .modal-panel {
+    @apply max-h-[90vh] w-full max-w-md overflow-y-auto;
+  }
+  .modal-header {
+    @apply mb-4 flex items-start justify-between gap-4;
+  }
+  .modal-title {
+    @apply text-lg font-semibold text-fg;
+  }
+  .dialog-message {
+    @apply mb-6 text-sm text-muted;
+  }
+  .dialog-actions {
+    @apply flex justify-end gap-2;
+  }
+
+  /* ---------- Form field ka dhancha ---------- */
+  .form-field {
+    @apply flex flex-col gap-1;
+  }
+  .form-label {
+    @apply text-sm font-medium text-fg;
+  }
+  .form-required {
+    @apply text-danger;
+  }
+  .form-error {
+    @apply text-xs text-danger;
+  }
+  /* ---------- Link ---------- */
+  .link {
+    @apply font-medium text-brand hover:underline;
+  }
