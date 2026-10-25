@@ -1,6 +1,8 @@
 import EventRegistration from "../models/EventRegistration.js";
 import Event from "../models/Event.js";
-import { fail } from "../utils/fail.js";
+import { fail, checkValidId, applyFields, failOnDuplicate } from "../utils/fail.js";
+import Session from "../models/Session.js";
+import SessionRegistration from "../models/SessionRegistration.js";
 
 const REGISTRATION_STATUSES = ["registered", "cancelled"];
 
@@ -77,6 +79,13 @@ export const cancelRegistration = async (req, res) => {
   if (!registration) {
     fail(res, 404, "Active registration not found");
   }
+
+  // Event ki registration khatam to us event ke sessions ki registrations bhi khatam
+  const sessionIds = await Session.find({ eventId: registration.eventId }).distinct("_id");
+  await SessionRegistration.updateMany(
+    { attendeeId: req.user._id, sessionId: { $in: sessionIds }, status: "registered" },
+    { status: "cancelled", cancelledAt: new Date() }
+  );
 
   res.json(registration);
 };

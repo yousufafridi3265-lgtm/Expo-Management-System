@@ -31,12 +31,12 @@ All event endpoints are mounted under `/api/events`.
 | `GET /api/events/:id` | Public | MongoDB event ID in the path | Returns the matching event; invalid IDs return 400 and missing events return 404. |
 | `POST /api/events` | Admin only | JSON object with event fields | Creates and returns an event with status 201. `createdBy` is taken from the authenticated admin. |
 | `PUT /api/events/:id` | Admin only | Event ID and a JSON object containing one or more editable fields | Updates only supplied event fields and returns the saved event. Invalid IDs return 400 and missing events return 404. |
-| `DELETE /api/events/:id` | Admin only | MongoDB event ID in the path | Deletes the event and returns a success message; invalid IDs return 400 and missing events return 404. |
+| `DELETE /api/events/:id` | Admin only | MongoDB event ID in the path | Deletes the event if it has no booths, sessions, or registrations; otherwise returns 409. Invalid IDs return 400 and missing events return 404. |
 
 For create and update requests, the editable fields are `name`, `description`,
 `startDate`, `endDate`, `location`, and `status`. Unknown body fields are
 ignored. The model validates required values, status options, and date order.
-Send an `Authorization: Bearer <token>` header for admin-only routes; the token
+Admin-only routes require a JWT sent using bearer authentication in the Authorization header; the token
 must belong to a user whose current database role is `admin`.
 
 Example create request body:
@@ -72,7 +72,9 @@ In [`../controllers/eventController.js`](../controllers/eventController.js):
 - `updateEvent(req, res)` validates the ID, loads the event, applies only
   supplied editable fields, and calls `save()` so schema validation runs.
 - `deleteEvent(req, res)` validates the ID, removes the event, and reports a
-  404 if there was nothing to delete.
+  404 if there was nothing to delete. It returns 409 if the event still has
+  booths, sessions, or registrations; events with registrations must be
+  cancelled rather than deleted.
 
 The controller uses the shared [`fail` helper](../utils/fail.js) to set an HTTP
 status and pass an error to centralized error middleware.
@@ -94,7 +96,7 @@ In [`../routes/eventRoutes.js`](../routes/eventRoutes.js):
 - [`../app.js`](../app.js) creates the Express app, enables JSON request
   parsing and CORS, registers `/api/auth` and `/api/events`, and installs
   not-found and error middleware after the routes.
-- The health check is currently `GET /api/check`.
+- The health check is currently `GET /api/health`.
 - [`../server.js`](../server.js) loads environment configuration, calls
   `connectDB()` before listening, and starts the server on `PORT` or port
   `5000` by default.

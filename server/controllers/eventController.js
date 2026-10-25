@@ -1,6 +1,8 @@
 import Event from "../models/Event.js";
 import Booth from "../models/Booth.js";
-import { fail } from "../utils/fail.js";
+import Session from "../models/Session.js";
+import EventRegistration from "../models/EventRegistration.js";
+import { fail, checkValidId, applyFields, failOnDuplicate } from "../utils/fail.js";
 
 // Sirf yeh fields admin se li jati hain. createdBy kabhi body se nahi aata
 const pickEventFields = (body) => {
@@ -66,6 +68,17 @@ export const deleteEvent = async (req, res) => {
   const hasBooths = await Booth.exists({ eventId: req.params.id });
   if (hasBooths) {
     fail(res, 409, "Delete this event's booths first");
+  }
+
+  const hasSessions = await Session.exists({ eventId: req.params.id });
+  if (hasSessions) {
+    fail(res, 409, "Delete this event's sessions first");
+  }
+
+  // Jis event mein attendees register ho chuke hon, usay delete nahi karte, status "cancelled" kar dete hain
+  const hasRegistrations = await EventRegistration.exists({ eventId: req.params.id });
+  if (hasRegistrations) {
+    fail(res, 409, "This event has registrations. Set its status to cancelled instead of deleting it");
   }
 
   const event = await Event.findByIdAndDelete(req.params.id);

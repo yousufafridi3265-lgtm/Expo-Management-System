@@ -2,14 +2,13 @@ import Booking from "../models/Booking.js";
 import Booth from "../models/Booth.js";
 import Event from "../models/Event.js";
 import Exhibitor from "../models/Exhibitor.js";
-import { fail } from "../utils/fail.js";
+import { fail, checkValidId, applyFields, failOnDuplicate } from "../utils/fail.js";
 
 const BOOKING_STATUSES = ["confirmed", "cancelled"];
 
 // Booking ke saath booth aur event ki zaroori details bhi dikhane ke liye
 const withDetails = (query) =>
-  query
-    .populate("boothId", "boothNumber location size price")
+  query.populate("boothId", "boothNumber location size price")
     .populate("eventId", "name startDate endDate location");
 
 // POST /api/bookings  (sirf exhibitor): booth book karna. Body: { "boothId": "..." }

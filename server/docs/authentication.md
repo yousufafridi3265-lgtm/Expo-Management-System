@@ -30,7 +30,7 @@ All authentication routes are mounted under `/api/auth` in
 | --- | --- | --- | --- |
 | `POST /api/auth/register` | Public | JSON with `name`, `email`, `password`, and optional `role` | HTTP 201 with `{ "token": "...", "user": { "id": "...", "name": "...", "email": "...", "role": "..." } }` |
 | `POST /api/auth/login` | Public | JSON with `email` and `password` | HTTP 200 with the same token and safe-user structure as registration |
-| `GET /api/auth/me` | Valid Bearer token required | `Authorization: Bearer <token>` header | HTTP 200 with `{ "user": { "id": "...", "name": "...", "email": "...", "role": "..." } }` |
+| `GET /api/auth/me` | Authenticated | JWT sent using bearer authentication in the Authorization header | HTTP 200 with `{ "user": { "id": "...", "name": "...", "email": "...", "role": "..." } }` |
 
 ### Registration request
 
@@ -73,7 +73,7 @@ Example:
 Include the token returned by registration or login on protected requests:
 
 ```text
-Authorization: Bearer <token>
+Authorization: Bearer YOUR_TOKEN
 ```
 
 The token lifetime is controlled by `JWT_EXPIRES_IN` and defaults to `7d`.

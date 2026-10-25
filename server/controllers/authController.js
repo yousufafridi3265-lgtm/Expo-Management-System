@@ -2,7 +2,8 @@ import bcrypt from "bcrypt";
 import User from "../models/User.js";
 import generateToken from "../utils/generateToken.js";
 import { protect } from "../middleware/authMiddleware.js";
-import { fail } from "../utils/fail.js";
+import { fail, checkValidId, applyFields, failOnDuplicate } from "../utils/fail.js";
+
 // Public registration mein admin banana allowed nahi hai
 const PUBLIC_ROLES = ["exhibitor", "attendee"];
 

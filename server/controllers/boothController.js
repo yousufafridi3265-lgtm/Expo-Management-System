@@ -1,6 +1,6 @@
 import Booth from "../models/Booth.js";
 import Event from "../models/Event.js";
-import { fail } from "../utils/fail.js";
+import { fail, checkValidId, applyFields, failOnDuplicate } from "../utils/fail.js";
 
 const ALL_STATUSES = ["available", "booked", "unavailable"];
 // Admin sirf yeh do status khud laga sakta hai. "booked" sirf Booking module lagayega

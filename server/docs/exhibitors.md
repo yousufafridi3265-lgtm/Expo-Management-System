@@ -172,11 +172,3 @@ In [`../routes/exhibitorRoutes.js`](../routes/exhibitorRoutes.js):
   `req.user`.
 - On logo upload, authentication and the exhibitor-role check happen before
   Multer processes the file.
-
-## Current implementation note
-
-`checkValidId` is imported by the controller from `utils/fail.js`. In the
-current helper source, it calls `mongoose.isValidObjectId` but `mongoose` is not
-imported in that file. As a result, routes that call `checkValidId` may raise a
-`ReferenceError` instead of returning the documented invalid-ID 400 response.
-The helper needs a Mongoose import for that validation to work as intended.

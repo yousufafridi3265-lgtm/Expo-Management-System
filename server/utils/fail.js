@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 export const fail = (res, status, message) => {
   res.status(status);
   throw new Error(message);

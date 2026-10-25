@@ -1,5 +1,5 @@
 import Exhibitor from "../models/Exhibitor.js";
-import { fail } from "../utils/fail.js";
+import { fail, checkValidId, applyFields, failOnDuplicate } from "../utils/fail.js";
 import { saveLogo, deleteLogo } from "../utils/upload.js";
 
 const APPROVAL_STATUSES = ["pending", "approved", "rejected"];

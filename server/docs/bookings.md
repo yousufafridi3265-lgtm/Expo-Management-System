@@ -40,9 +40,7 @@ All booking endpoints are mounted under `/api/bookings`.
 | `GET /api/bookings` | Authenticated admin | Optional `eventId` and `status` query parameters | Lists all bookings, optionally filtered, newest first, with booth, event, and exhibitor company/contact details. |
 | `PUT /api/bookings/:id/cancel` | Authenticated exhibitor or admin | Booking ObjectId in the path | Cancels a confirmed booking. An exhibitor can cancel only their own booking; an admin can cancel any confirmed booking. The booth is then made available again. |
 
-Admin routes and exhibitor routes require an
-`Authorization: Bearer <token>` header. The user role is checked from the
-current user record loaded by authentication middleware.
+Admin and exhibitor routes require a JWT sent using bearer authentication in the Authorization header. The user role is checked from the current user record loaded by authentication middleware.
 
 Example booking request:
 
@@ -138,13 +136,3 @@ In [`../routes/bookingRoutes.js`](../routes/bookingRoutes.js):
 - The event controller prevents deletion of an event while it has booths.
   Consequently, events with bookings also remain protected from deletion
   until their booths have been removed.
-
-## Current implementation note
-
-The booking controller calls `checkValidId` in create, admin-list, and cancel
-handlers, but imports only `fail` from `utils/fail.js`. Those requests can
-currently fail with a `ReferenceError` instead of performing the intended ID
-validation. Additionally, the shared `checkValidId` helper uses
-`mongoose.isValidObjectId` without importing `mongoose`. These are code issues
-noted for accuracy; this documentation change does not modify the
-implementation.

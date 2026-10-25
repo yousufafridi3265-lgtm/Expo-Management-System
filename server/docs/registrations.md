@@ -35,11 +35,11 @@ All registration endpoints are mounted under `/api/registrations`.
 | Method and path | Access | Input | Purpose and result |
 | --- | --- | --- | --- |
 | `POST /api/registrations` | Authenticated attendee | JSON `{ "eventId": "<event ObjectId>" }` | Registers the logged-in attendee for an upcoming event. Returns HTTP 201 with the registration. |
-| `GET /api/registrations/my` | Authenticated attendee | Bearer token | Returns the attendee's registrations, newest first, with selected event details populated. |
+| `GET /api/registrations/my` | Authenticated attendee | None | Returns the attendee's registrations, newest first, with selected event details populated. |
 | `PUT /api/registrations/:id/cancel` | Authenticated attendee | Registration ObjectId in the path | Cancels only the logged-in attendee's active registration and records `cancelledAt`. |
 | `GET /api/registrations` | Authenticated admin | Optional `eventId` and `status` query parameters | Lists all registrations, newest first, optionally filtered, with attendee and event details. |
 
-Protected routes require an `Authorization: Bearer <token>` header. The server
+Protected routes require a JWT sent using bearer authentication in the Authorization header. The server
 uses the authenticated user ID as `attendeeId`; a client cannot register on
 behalf of another user.
 
@@ -75,9 +75,13 @@ returns a conflict.
 
 An attendee can cancel only their own registration, and only while its status
 is `registered`. Cancellation sets the status to `cancelled` and adds the
-current time to `cancelledAt`. The record is retained as history. Since the
-unique index applies only to active registrations, the attendee may register
-for the event again after cancellation.
+current time to `cancelledAt`. The event registration record is retained as
+history. The controller also cancels the attendee's active registrations for
+sessions belonging to that event, recording a cancellation time for each.
+
+Since the event registration's unique index applies only to active
+registrations, the attendee may register for the event again after
+cancellation.
 
 ## Populated response details
 
@@ -104,9 +108,9 @@ Functions are defined in
   `registered`. This ownership/status filter prevents cancellation of another
   attendee's registration or one already cancelled.
 
-The controller intends to use shared `checkValidId` and `failOnDuplicate`
-helpers from [`../utils/fail.js`](../utils/fail.js), in addition to `fail` for
-HTTP errors.
+The controller uses the shared `checkValidId`, `failOnDuplicate`, and `fail`
+helpers from [`../utils/fail.js`](../utils/fail.js) for ID validation and
+consistent HTTP errors.
 
 ## Route authorization
 
@@ -121,20 +125,3 @@ In [`../routes/registrationRoutes.js`](../routes/registrationRoutes.js):
 
 The router is mounted by
 [`../app.js`](../app.js) at `/api/registrations`.
-
-## Current implementation notes
-
-The current source has several missing imports/references that may prevent
-these routes from working:
-
-- In `registrationRoutes.js`, the admin route uses `getAllRegistrations`
-  without importing that identifier. The controller is imported as the
-  namespace `registration`, so the route likely needs to reference
-  `registration.getAllRegistrations`.
-- In `registrationController.js`, `checkValidId` and `failOnDuplicate` are
-  called but only `fail` is imported from `utils/fail.js`.
-- In `utils/fail.js`, `checkValidId` calls `mongoose.isValidObjectId` although
-  `mongoose` is not imported there.
-
-These issues are documented as observed; this documentation change does not
-modify application code.

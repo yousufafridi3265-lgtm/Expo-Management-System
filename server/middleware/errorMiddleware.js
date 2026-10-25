@@ -8,6 +8,8 @@ export const notFound = (req, res, next) => {
 export const errorHandler = (err, req, res, next) => {
   // Mongoose ke aam errors ko sahi status code dete hain
   if (err.name === "ValidationError") res.status(400);
+  // Galat type ki value, jaise price mein "abc"
+  if (err.name === "CastError") res.status(400);
   // Multer ke errors, jaise file bohat bari ho
   if (err.name === "MulterError") res.status(400);
   if (err.code === 11000) {

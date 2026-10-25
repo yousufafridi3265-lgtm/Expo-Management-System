@@ -11,6 +11,6 @@ router.get("/my", protect, authorizeRoles("attendee"), registration.getMyRegistr
 router.put("/:id/cancel", protect, authorizeRoles("attendee"), registration.cancelRegistration);
 
 // Admin
-router.get("/", protect, authorizeRoles("admin"), getAllRegistrations);
+router.get("/", protect, authorizeRoles("admin"), registration.getAllRegistrations);
 
 export default router;

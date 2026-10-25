@@ -35,7 +35,7 @@ All booth endpoints are mounted under `/api/booths`.
 | `PUT /api/booths/:id` | Authenticated admin | Booth ObjectId and one or more editable booth fields | Updates supplied fields and returns the updated booth. Booked booths cannot be changed. |
 | `DELETE /api/booths/:id` | Authenticated admin | Booth ObjectId in the path | Deletes the booth and returns a success message. Booked booths cannot be deleted. |
 
-Admin routes require an `Authorization: Bearer <token>` header for a user whose
+Admin routes require a JWT sent using bearer authentication in the Authorization header for a user whose
 current database role is `admin`. Public list filters accept these status
 values: `available`, `booked`, and `unavailable`. An invalid status filter
 returns 400.
@@ -99,18 +99,6 @@ In [`../routes/boothRoutes.js`](../routes/boothRoutes.js):
 - `POST`, `PUT`, and `DELETE` run `protect` followed by
   `authorizeRoles("admin")`.
 - Authentication runs first so the role middleware can inspect `req.user`.
-
-## Current implementation note
-
-The controller calls `checkValidId` in list/detail/create/update handlers and
-`applyFields` in the update handler, but neither function is imported in
-[`../controllers/boothController.js`](../controllers/boothController.js).
-Those requests can currently fail with a `ReferenceError` rather than complete
-their intended validation/update behavior. In addition, the shared
-[`../utils/fail.js`](../utils/fail.js) defines `checkValidId` using
-`mongoose.isValidObjectId` but does not import `mongoose`. These are source
-code issues noted here for accuracy; this documentation change does not modify
-the implementation.
 
 ## Server registration
 
