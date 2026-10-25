@@ -1,5 +1,7 @@
+import "dotenv/config";
 import cors from "cors";
 import express from "express";
+import { LOGOS_DIR } from "./utils/upload.js";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
@@ -12,7 +14,6 @@ import feedbackRoutes from "./routes/feedbackRoutes.js";
 import exhibitorRoutes from "./routes/exhibitorRoutes.js";
 import registrationRoutes from "./routes/registrationRoutes.js";
 
-import { LOGOS_DIR } from "./utils/upload.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 const app = express();
 
@@ -20,10 +21,11 @@ app.use(cors({ origin: process.env.CLIENT_URL || "http://localhost:5173" ,
    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
  }));
+
 app.use(express.json());
 
 // Health check: server chal raha hai ya nahi
-app.get("/api/health", (req, res) => {
+app.get("/", (req, res) => {
   res.json({ status: "ok", message: "Expo Management API is running" });
 });
 
