@@ -10,7 +10,10 @@ export const AUTH_EXPIRED_EVENT = "auth:expired";
 const AUTH_PATHS = ["/auth/login", "/auth/register"];
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL
+  baseURL: import.meta.env.VITE_API_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
 // Har request se pehle: token ho to Authorization header laga do
