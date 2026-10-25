@@ -85,8 +85,7 @@ In [`../routes/eventRoutes.js`](../routes/eventRoutes.js):
 
 - Public `GET` routes do not require authentication, allowing visitors to
   browse events.
-- `protect` runs before admin write handlers. It verifies the Bearer token,
-  loads the current user, and sets `req.user`.
+- `protect` runs before admin write handlers. It verifies the JWT, loads the current user, and sets `req.user`.
 - `authorizeRoles("admin")` runs after `protect` and permits writes only when
   the loaded user's role is `admin`. This order is required because role
   authorization depends on `req.user`.

@@ -22,6 +22,15 @@ server source code.
   documented in [bookings.md](./bookings.md).
 - Attendee event-registration fields, rules, routes, and controller behavior
   are documented in [registrations.md](./registrations.md).
+- Session fields, scheduling rules, and admin management routes are documented
+  in [sessions.md](./sessions.md).
+- Session bookmarks and session registrations are documented in
+  [session-bookmarks.md](./session-bookmarks.md) and
+  [session-registrations.md](./session-registrations.md).
+- Message/inquiry behavior and attendee feedback are documented in
+  [messages.md](./messages.md) and [feedback.md](./feedback.md).
+- Admin user listing and dashboard statistics are documented in
+  [users.md](./users.md) and [admin-dashboard.md](./admin-dashboard.md).
 - Not-found and centralized error middleware handle failed requests.
 - `server.js` loads environment variables, connects to MongoDB, and starts the
   HTTP server.
@@ -79,3 +88,9 @@ From the `server` directory:
 
 - `npm run dev` starts the server in watch mode.
 - `npm start` starts the server.
+- `npm run seed:admin` creates an admin account or promotes the matching
+  existing account. See [users.md](./users.md) for required environment
+  variables.
+- `npm run test:api` runs the API checks against a separate test database.
+  Set `TEST_DB_NAME` to a database name containing `test`; the script refuses
+  to run otherwise.

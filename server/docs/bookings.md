@@ -36,7 +36,7 @@ All booking endpoints are mounted under `/api/bookings`.
 | Method and path | Access | Input | Purpose and result |
 | --- | --- | --- | --- |
 | `POST /api/bookings` | Authenticated exhibitor | JSON `{ "boothId": "<booth ObjectId>" }` | Books a booth for the logged-in exhibitor, if the profile is approved and the booth's event is upcoming. Returns HTTP 201 with the booking. |
-| `GET /api/bookings/my` | Authenticated exhibitor | Bearer token | Returns the current exhibitor's bookings, newest first, with booth and event details. Returns an empty array if the user has no exhibitor profile. |
+| `GET /api/bookings/my` | Authenticated exhibitor | None | Returns the current exhibitor's bookings, newest first, with booth and event details. Returns an empty array if the user has no exhibitor profile. |
 | `GET /api/bookings` | Authenticated admin | Optional `eventId` and `status` query parameters | Lists all bookings, optionally filtered, newest first, with booth, event, and exhibitor company/contact details. |
 | `PUT /api/bookings/:id/cancel` | Authenticated exhibitor or admin | Booking ObjectId in the path | Cancels a confirmed booking. An exhibitor can cancel only their own booking; an admin can cancel any confirmed booking. The booth is then made available again. |
 

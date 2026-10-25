@@ -129,7 +129,7 @@ In [`../utils/generateToken.js`](../utils/generateToken.js):
 In [`../middleware/authMiddleware.js`](../middleware/authMiddleware.js),
 `protect(req, res, next)`:
 
-1. Reads the `Authorization` header and requires the `Bearer ` prefix.
+1. Reads the `Authorization` header and requires bearer-token authentication.
 2. Verifies the token using `JWT_SECRET`.
 3. Finds the user by the ID in the verified token.
 4. Returns 401 if the token is missing, invalid/expired, or its user no longer
