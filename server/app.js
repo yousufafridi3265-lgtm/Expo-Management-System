@@ -18,7 +18,8 @@ import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 const app = express();
 
 const allowedOrigins = [
-  "https://expo-management-system-g3xg-r5psujmkv-abcd-54b5.vercel.app",
+  "expo-management-system-g3xg-git-main-abcd-54b5.vercel.app",
+  "expo-management-system-g3xg-r5psujmkv-abcd-54b5.vercel.app",
   "http://localhost:5173"
 ];
 
