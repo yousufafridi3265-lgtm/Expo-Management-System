@@ -17,10 +17,23 @@ import registrationRoutes from "./routes/registrationRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 const app = express();
 
-app.use(cors({ origin: process.env.CLIENT_URL || "http://localhost:5173" ,
-   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
- }));
+const allowedOrigins = [
+  "https://expo-management-system-5mzw.vercel.app",
+  "https://expo-management-system-5mzw-ape977n7r-abcd-54b5.vercel.app",
+  "http://localhost:5173"
+];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    return callback(new Error(`CORS blocked origin: ${origin}`));
+  },
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
 
 app.use(express.json());
 
