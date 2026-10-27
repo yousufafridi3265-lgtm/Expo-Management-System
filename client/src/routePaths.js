@@ -6,3 +6,6 @@ export const ROUTES = {
   register: "/register",
   dashboard: "/dashboard"
 };
+
+// Kisi ek event ka asli link banane ke liye: eventPath("abc123") -> "/events/abc123"
+export const eventPath = (id) => `/events/${id}`;

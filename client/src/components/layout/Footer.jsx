@@ -7,6 +7,9 @@ const Footer = () => {
       <div className="footer-inner">
         <p>&copy; {new Date().getFullYear()} Expo Management System</p>
         <nav className="footer-links">
+          <Link to={ROUTES.events} className="link">
+            Events
+          </Link>
           <Link to={ROUTES.login} className="link">
             Log in
           </Link>

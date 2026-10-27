@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
-import logo from "../../assets/logo.jpg";
+import logo from "../../assets/logo.png";
 import ThemeToggle from "../common/ThemeToggle";
 import Button from "../common/Button";
 import { useAuth } from "../../context/AuthContext";
@@ -18,6 +18,13 @@ const Navbar = () => {
     closeMenu();
     logout();
   };
+
+  // Sab ke liye khule links (login ki zaroorat nahi)
+  const renderLinks = () => (
+    <Link to={ROUTES.events} className="btn btn-ghost" onClick={closeMenu}>
+      Events
+    </Link>
+  );
 
   // Desktop aur mobile dono menu mein yahi buttons dikhte hain, isliye ek hi jagah likhe hain
   const renderActions = () => {
@@ -58,6 +65,7 @@ const Navbar = () => {
         </Link>
 
         <div className="navbar-desktop">
+          {renderLinks()}
           {renderActions()}
           <ThemeToggle />
         </div>
@@ -76,7 +84,12 @@ const Navbar = () => {
         </div>
       </div>
 
-      {menuOpen && <nav className="navbar-mobile-menu">{renderActions()}</nav>}
+      {menuOpen && (
+        <nav className="navbar-mobile-menu">
+          {renderLinks()}
+          {renderActions()}
+        </nav>
+      )}
     </header>
   );
 };
