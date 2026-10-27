@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 import env from "dotenv";
-// import dns from "node:dns";
+import dns from "node:dns";
 
 env.config()
 
-// dns.setServers(["8.8.8.8", "1.1.1.1"]);
+dns.setServers(["8.8.8.8", "1.1.1.1"]);
 
 // MongoDB se connection ek hi jagah par banta hai
 const connectDB = async () => {
