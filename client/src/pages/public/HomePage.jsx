@@ -106,6 +106,9 @@ const HomePage = () => {
           <Link to={ROUTES.events} className="btn btn-secondary">
             Browse events
           </Link>
+          <Link to={ROUTES.exhibitors} className="btn btn-secondary">
+            Find exhibitors
+          </Link>
         </div>
       </section>
 

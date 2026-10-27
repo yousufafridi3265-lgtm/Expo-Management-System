@@ -8,10 +8,16 @@ import useFetch from "../../hooks/useFetch";
 import { getEventById } from "../../apis/eventApi";
 import { formatDateRange } from "../../utils/formatDate";
 import { ROUTES } from "../../routePaths";
+import EventRegistrationPanel from "../../components/common/EventRegistrationPanel";
 
 const EventDetailPage = () => {
   const { id } = useParams();
-  const { data: event, loading, error, reload } = useFetch(() => getEventById(id), [id]);
+  const {
+    data: event,
+    loading,
+    error,
+    reload,
+  } = useFetch(() => getEventById(id), [id]);
 
   const renderContent = () => {
     if (loading) return <PageLoader text="Loading event..." />;
@@ -35,7 +41,11 @@ const EventDetailPage = () => {
         </p>
 
         <h2 className="event-detail-heading">About this event</h2>
-        <p className="event-detail-text">{event.description || "No description has been added yet."}</p>
+        <p className="event-detail-text">
+          {event.description || "No description has been added yet."}
+        </p>
+
+        <EventRegistrationPanel event={event} />
       </article>
     );
   };

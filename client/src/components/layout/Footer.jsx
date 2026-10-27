@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import { ROUTES } from "../../routePaths";
 
 const Footer = () => {
+  const { user } = useAuth();
+
   return (
     <footer className="footer">
       <div className="footer-inner">
@@ -10,12 +13,20 @@ const Footer = () => {
           <Link to={ROUTES.events} className="link">
             Events
           </Link>
-          <Link to={ROUTES.login} className="link">
-            Log in
-          </Link>
-          <Link to={ROUTES.register} className="link">
-            Sign up
-          </Link>
+          {/* Login ho chuka ho to Log in / Sign up ki zaroorat nahi */}
+          {!user && (
+            <>
+              <Link to={ROUTES.login} className="link">
+                Log in
+              </Link>
+              <Link to={ROUTES.register} className="link">
+                Sign up
+              </Link>
+              <Link to={ROUTES.exhibitors} className="link">
+                Exhibitors
+              </Link>
+            </>
+          )}
         </nav>
       </div>
     </footer>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/logo.jpg";
 import ThemeToggle from "../common/ThemeToggle";
 import Button from "../common/Button";
 import { useAuth } from "../../context/AuthContext";
@@ -19,11 +19,21 @@ const Navbar = () => {
     logout();
   };
 
-  // Sab ke liye khule links (login ki zaroorat nahi)
+    // Events aur Exhibitors sab ke liye khule hain. "My registrations" sirf attendee ko dikhta hai
   const renderLinks = () => (
-    <Link to={ROUTES.events} className="btn btn-ghost" onClick={closeMenu}>
-      Events
-    </Link>
+    <>
+      <Link to={ROUTES.events} className="btn btn-ghost" onClick={closeMenu}>
+        Events
+      </Link>
+      <Link to={ROUTES.exhibitors} className="btn btn-ghost" onClick={closeMenu}>
+        Exhibitors
+      </Link>
+      {user?.role === "attendee" && (
+        <Link to={ROUTES.myRegistrations} className="btn btn-ghost" onClick={closeMenu}>
+          My registrations
+        </Link>
+      )}
+    </>
   );
 
   // Desktop aur mobile dono menu mein yahi buttons dikhte hain, isliye ek hi jagah likhe hain
