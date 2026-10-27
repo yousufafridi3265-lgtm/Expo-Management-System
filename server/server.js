@@ -18,20 +18,23 @@
 //   console.log(`Server running on port ${PORT}`);
 // });
 
+
 import "dotenv/config";
 import app from "./app.js";
 import connectDB from "./config/db.js";
 
-let dbPromise;
+const PORT = process.env.PORT || 5000;
 
-app.use(async (req, res, next) => {
+if (process.env.NODE_ENV !== "production") {
   try {
-    dbPromise ??= connectDB();
-    await dbPromise;
-    next();
+    await connectDB();
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
   } catch (error) {
-    next(error);
+    console.error("DATABASE STARTUP ERROR:", error);
+    process.exit(1);
   }
-});
+}
 
 export default app;
