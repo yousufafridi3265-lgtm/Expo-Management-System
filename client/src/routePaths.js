@@ -9,7 +9,13 @@ export const ROUTES = {
   eventDetail: "/events/:id",
   exhibitors: "/exhibitors",
   exhibitorDetail: "/exhibitors/:id",
-  myRegistrations: "/my-registrations"
+  myRegistrations: "/my-registrations",
+  myCompany: "/my-company",
+  adminEvents: "/admin/events",
+  adminExhibitors: "/admin/exhibitors",
+  adminBooths: "/admin/events/:id/booths",
+  adminBookings: "/admin/bookings",
+  myBookings: "/my-bookings",
 };
 
 // Kisi ek event ka asli link banane ke liye: eventPath("abc123") -> "/events/abc123"
@@ -17,3 +23,6 @@ export const eventPath = (id) => `/events/${id}`;
 
 // Kisi ek exhibitor ka asli link: exhibitorPath("abc123") -> "/exhibitors/abc123"
 export const exhibitorPath = (id) => `/exhibitors/${id}`;
+
+// Kisi event ke booths ka admin page: adminBoothsPath("abc123") -> "/admin/events/abc123/booths"
+export const adminBoothsPath = (id) => `/admin/events/${id}/booths`;

@@ -18,7 +18,6 @@ const Button = ({
       disabled={disabled || loading}
       aria-busy={loading}
       {...rest}
-      title={children}
     >
       {loading && <Spinner />}
       {children}

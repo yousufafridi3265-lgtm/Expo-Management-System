@@ -1,5 +1,13 @@
 import { Link } from "react-router-dom";
-import { FiBriefcase, FiCalendar, FiClipboard } from "react-icons/fi";
+import {
+  FiBriefcase,
+  FiCalendar,
+  FiCheckSquare,
+  FiClipboard,
+  FiHome,
+  FiList,
+  FiPackage,
+} from "react-icons/fi";
 import PublicLayout from "../components/layout/PublicLayout";
 import PageHeader from "../components/common/PageHeader";
 import { useAuth } from "../context/AuthContext";
@@ -29,13 +37,49 @@ const LINKS_BY_ROLE = {
   ],
   exhibitor: [
     {
+      to: ROUTES.myCompany,
+      icon: FiHome,
+      title: "My company",
+      text: "Edit your profile, add products and upload your logo.",
+    },
+    {
+      to: ROUTES.myBookings,
+      icon: FiPackage,
+      title: "My bookings",
+      text: "See or cancel the booths you booked.",
+    },
+    {
       to: ROUTES.events,
       icon: FiCalendar,
       title: "Browse events",
-      text: "See which expos are coming up.",
+      text: "Pick an event and book a booth.",
+    },
+    {
+      to: ROUTES.exhibitors,
+      icon: FiBriefcase,
+      title: "Other exhibitors",
+      text: "See the companies already on the platform.",
     },
   ],
   admin: [
+    {
+      to: ROUTES.adminExhibitors,
+      icon: FiCheckSquare,
+      title: "Manage exhibitors",
+      text: "Approve or reject company profiles.",
+    },
+    {
+      to: ROUTES.adminEvents,
+      icon: FiCalendar,
+      title: "Manage events",
+      text: "Create, edit and remove expos, and their booths.",
+    },
+    {
+      to: ROUTES.adminBookings,
+      icon: FiList,
+      title: "Bookings",
+      text: "See every booth booking and cancel if needed.",
+    },
     {
       to: ROUTES.events,
       icon: FiCalendar,

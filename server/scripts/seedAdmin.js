@@ -26,11 +26,12 @@ if (existingUser) {
   // Is email ka user pehle se hai: usay admin bana dete hain, password nahi badalte
   existingUser.role = "admin";
   await existingUser.save();
-  console.log(`${email} pehle se maujood tha, ab woh admin hai (password nahi badla).`);
+  console.log(`${email} already existed, now they are an admin (password was not changed).`);
 } else {
   const passwordHash = await bcrypt.hash(ADMIN_PASSWORD, 10);
   await User.create({ name: ADMIN_NAME, email, passwordHash, role: "admin" });
-  console.log(`Admin ban gaya: ${email}`);
+  console.log(`Admin Created: ${email}`);
 }
+
 
 await mongoose.disconnect();

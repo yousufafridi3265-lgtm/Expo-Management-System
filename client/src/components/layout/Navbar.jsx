@@ -19,22 +19,51 @@ const Navbar = () => {
     logout();
   };
 
-    // Events aur Exhibitors sab ke liye khule hain. "My registrations" sirf attendee ko dikhta hai
-  const renderLinks = () => (
-    <>
-      <Link to={ROUTES.events} className="btn btn-ghost" onClick={closeMenu}>
-        Events
-      </Link>
-      <Link to={ROUTES.exhibitors} className="btn btn-ghost" onClick={closeMenu}>
-        Exhibitors
-      </Link>
-      {user?.role === "attendee" && (
-        <Link to={ROUTES.myRegistrations} className="btn btn-ghost" onClick={closeMenu}>
-          My registrations
+    // Admin ko sirf apne kaam ke links dikhte hain (public Events/Exhibitors dashboard aur footer se khulte hain).
+  // Baaqi sab ko Events aur Exhibitors, aur apne role ke links
+  const renderLinks = () => {
+    if (user?.role === "admin") {
+      return (
+        <>
+          <Link to={ROUTES.adminEvents} className="btn btn-ghost" onClick={closeMenu}>
+            Manage events
+          </Link>
+          <Link to={ROUTES.adminExhibitors} className="btn btn-ghost" onClick={closeMenu}>
+            Manage exhibitors
+          </Link>
+          <Link to={ROUTES.adminBookings} className="btn btn-ghost" onClick={closeMenu}>
+            Bookings
+          </Link>
+        </>
+      );
+    }
+
+    return (
+      <>
+        <Link to={ROUTES.events} className="btn btn-ghost" onClick={closeMenu}>
+          Events
         </Link>
-      )}
-    </>
-  );
+        <Link to={ROUTES.exhibitors} className="btn btn-ghost" onClick={closeMenu}>
+          Exhibitors
+        </Link>
+        {user?.role === "attendee" && (
+          <Link to={ROUTES.myRegistrations} className="btn btn-ghost" onClick={closeMenu}>
+            My registrations
+          </Link>
+        )}
+        {user?.role === "exhibitor" && (
+          <>
+            <Link to={ROUTES.myCompany} className="btn btn-ghost" onClick={closeMenu}>
+              My company
+            </Link>
+            <Link to={ROUTES.myBookings} className="btn btn-ghost" onClick={closeMenu}>
+              My bookings
+            </Link>
+          </>
+        )}
+      </>
+    );
+  };
 
   // Desktop aur mobile dono menu mein yahi buttons dikhte hain, isliye ek hi jagah likhe hain
   const renderActions = () => {
@@ -44,7 +73,11 @@ const Navbar = () => {
     if (user) {
       return (
         <>
-          <Link to={ROUTES.dashboard} className="btn btn-ghost" onClick={closeMenu}>
+          <Link
+            to={ROUTES.dashboard}
+            className="btn btn-ghost"
+            onClick={closeMenu}
+          >
             Dashboard
           </Link>
           <Button variant="secondary" onClick={handleLogout}>
@@ -59,7 +92,11 @@ const Navbar = () => {
         <Link to={ROUTES.login} className="btn btn-ghost" onClick={closeMenu}>
           Log in
         </Link>
-        <Link to={ROUTES.register} className="btn btn-primary" onClick={closeMenu}>
+        <Link
+          to={ROUTES.register}
+          className="btn btn-primary"
+          onClick={closeMenu}
+        >
           Sign up
         </Link>
       </>
@@ -89,7 +126,11 @@ const Navbar = () => {
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
           >
-            {menuOpen ? <FiX size={22} aria-hidden="true" /> : <FiMenu size={22} aria-hidden="true" />}
+            {menuOpen ? (
+              <FiX size={22} aria-hidden="true" />
+            ) : (
+              <FiMenu size={22} aria-hidden="true" />
+            )}
           </button>
         </div>
       </div>

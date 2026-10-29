@@ -266,7 +266,48 @@
   .exhibitor-card-title {
     @apply mb-1 text-lg font-semibold text-fg;
   }
+    /* ---------- Exhibitor portal ---------- */
+  .visually-hidden {
+    @apply absolute h-px w-px overflow-hidden whitespace-nowrap;
+    clip: rect(0 0 0 0);
+  }
+  .logo-uploader {
+    @apply flex flex-wrap items-center gap-4;
+  }
+  .approval-notice {
+    @apply flex flex-col gap-2 border-t border-line pt-4;
+  }
+  .approval-notice-top {
+    @apply flex items-center gap-2;
+  }
+  .approval-notice-label {
+    @apply text-sm font-medium text-fg;
+  }
+  .products-manager {
+    @apply flex flex-col gap-6;
+  }
+
+    /* ---------- Admin pages ---------- */
+  .admin-list {
+    @apply flex flex-col gap-4;
+  }
+  .admin-row {
+    @apply flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between;
+  }
+  .admin-row-main {
+    @apply flex items-start gap-3;
+  }
+  .admin-row-title-line {
+    @apply mb-1 flex flex-wrap items-center gap-2;
+  }
+  .admin-row-title {
+    @apply text-lg font-semibold text-fg;
+  }
+  .admin-row-actions {
+    @apply flex flex-wrap gap-2;
+  }
   
+
 }
 
  

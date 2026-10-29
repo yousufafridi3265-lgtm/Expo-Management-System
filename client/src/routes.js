@@ -5,14 +5,26 @@ import { ROUTES } from "./routePaths";
 // Is se pehli dafa app khulna tez hota hai. App.jsx ka <Suspense> intezar ke dauran PageLoader dikhata hai
 const HomePage = lazy(() => import("./pages/public/HomePage"));
 const ExhibitorsPage = lazy(() => import("./pages/public/ExhibitorsPage"));
-const ExhibitorDetailPage = lazy(() => import("./pages/public/ExhibitorDetailPage"));
-const MyRegistrationsPage = lazy(() => import("./pages/attendee/MyRegistrationsPage"));
+const ExhibitorDetailPage = lazy(
+  () => import("./pages/public/ExhibitorDetailPage"),
+);
+const MyRegistrationsPage = lazy(
+  () => import("./pages/attendee/MyRegistrationsPage"),
+);
 const LoginPage = lazy(() => import("./pages/auth/LoginPage"));
 const RegisterPage = lazy(() => import("./pages/auth/RegisterPage"));
 const EventsPage = lazy(() => import("./pages/public/EventsPage"));
 const EventDetailPage = lazy(() => import("./pages/public/EventDetailPage"));
 const DashboardPage = lazy(() => import("./pages/DashboardPage"));
 const NotFoundPage = lazy(() => import("./pages/public/NotFoundPage"));
+const MyCompanyPage = lazy(() => import("./pages/exhibitor/MyCompanyPage"));
+const AdminEventsPage = lazy(() => import("./pages/admin/AdminEventsPage"));
+const AdminExhibitorsPage = lazy(
+  () => import("./pages/admin/AdminExhibitorsPage"),
+);
+const AdminBoothsPage = lazy(() => import("./pages/admin/AdminBoothsPage"));
+const AdminBookingsPage = lazy(() => import("./pages/admin/AdminBookingsPage"));
+const MyBookingsPage = lazy(() => import("./pages/exhibitor/MyBookingsPage"));
 
 // App.jsx isi list se Route banata hai.
 // access: "guest" (sirf bina login walay), "auth" (login zaroori), "public" (sab)
@@ -23,10 +35,55 @@ export const appRoutes = [
   { path: ROUTES.events, component: EventsPage, access: "public" },
   { path: ROUTES.eventDetail, component: EventDetailPage, access: "public" },
   { path: ROUTES.exhibitors, component: ExhibitorsPage, access: "public" },
-  { path: ROUTES.exhibitorDetail, component: ExhibitorDetailPage, access: "public" },
+  {
+    path: ROUTES.exhibitorDetail,
+    component: ExhibitorDetailPage,
+    access: "public",
+  },
   { path: ROUTES.login, component: LoginPage, access: "guest" },
   { path: ROUTES.register, component: RegisterPage, access: "guest" },
   { path: ROUTES.dashboard, component: DashboardPage, access: "auth" },
-  { path: ROUTES.myRegistrations, component: MyRegistrationsPage, access: "auth", roles: ["attendee"] },
-  { path: "*", component: NotFoundPage, access: "public" }
+  {
+    path: ROUTES.myRegistrations,
+    component: MyRegistrationsPage,
+    access: "auth",
+    roles: ["attendee"],
+  },
+  {
+    path: ROUTES.adminBookings,
+    component: AdminBookingsPage,
+    access: "auth",
+    roles: ["admin"],
+  },
+  {
+    path: ROUTES.myBookings,
+    component: MyBookingsPage,
+    access: "auth",
+    roles: ["exhibitor"],
+  },
+  { path: "*", component: NotFoundPage, access: "public" },
+  {
+    path: ROUTES.myCompany,
+    component: MyCompanyPage,
+    access: "auth",
+    roles: ["exhibitor"],
+  },
+  {
+    path: ROUTES.adminEvents,
+    component: AdminEventsPage,
+    access: "auth",
+    roles: ["admin"],
+  },
+  {
+    path: ROUTES.adminExhibitors,
+    component: AdminExhibitorsPage,
+    access: "auth",
+    roles: ["admin"],
+  },
+  {
+    path: ROUTES.adminBooths,
+    component: AdminBoothsPage,
+    access: "auth",
+    roles: ["admin"],
+  },
 ];
