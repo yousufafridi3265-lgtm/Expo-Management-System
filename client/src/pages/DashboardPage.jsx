@@ -4,14 +4,17 @@ import {
   FiCalendar,
   FiCheckSquare,
   FiClipboard,
+  FiClock,
   FiHome,
   FiList,
-  FiPackage,
+  FiPackage,  FiMessageSquare,
+  FiInbox
 } from "react-icons/fi";
 import PublicLayout from "../components/layout/PublicLayout";
 import PageHeader from "../components/common/PageHeader";
 import { useAuth } from "../context/AuthContext";
 import { ROUTES } from "../routePaths";
+import AdminStats from "../components/admin/AdminStats";
 
 // Har role ko wohi links dikhte hain jo ab tak bane hain. Naya page banne par yahan ek entry jod dein
 const LINKS_BY_ROLE = {
@@ -33,6 +36,18 @@ const LINKS_BY_ROLE = {
       icon: FiClipboard,
       title: "My registrations",
       text: "Check or cancel the events you registered for.",
+    },
+    {
+      to: ROUTES.mySchedule,
+      icon: FiClock,
+      title: "My schedule",
+      text: "Your registered and bookmarked sessions.",
+    },
+    {
+      to: ROUTES.messages,
+      icon: FiMessageSquare,
+      title: "Messages",
+      text: "Ask the organizers a question or send feedback.",
     },
   ],
   exhibitor: [
@@ -60,6 +75,12 @@ const LINKS_BY_ROLE = {
       title: "Other exhibitors",
       text: "See the companies already on the platform.",
     },
+    {
+      to: ROUTES.messages,
+      icon: FiMessageSquare,
+      title: "Messages",
+      text: "Ask the organizers a question or send feedback.",
+    },
   ],
   admin: [
     {
@@ -72,7 +93,7 @@ const LINKS_BY_ROLE = {
       to: ROUTES.adminEvents,
       icon: FiCalendar,
       title: "Manage events",
-      text: "Create, edit and remove expos, and their booths.",
+      text: "Create, edit and remove expos, with their sessions and booths.",
     },
     {
       to: ROUTES.adminBookings,
@@ -85,6 +106,12 @@ const LINKS_BY_ROLE = {
       icon: FiCalendar,
       title: "Browse events",
       text: "See all expos.",
+    },
+    {
+      to: ROUTES.adminInbox,
+      icon: FiInbox,
+      title: "Inbox",
+      text: "Answer questions and read feedback.",
     },
   ],
 };
@@ -100,6 +127,8 @@ const DashboardPage = () => {
           title={`Welcome, ${user.name}`}
           subtitle={`Logged in as ${user.role}`}
         />
+        {/* Sirf admin ko ginti dikhti hai */}
+        {user.role === "admin" && <AdminStats />}
 
         <div className="dashboard-grid">
           {links.map(({ to, icon: Icon, title, text }) => (
@@ -111,11 +140,6 @@ const DashboardPage = () => {
           ))}
         </div>
 
-        {user.role !== "attendee" && (
-          <p className="dashboard-note">
-            More tools for your role are on the way.
-          </p>
-        )}
       </div>
     </PublicLayout>
   );

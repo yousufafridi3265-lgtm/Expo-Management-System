@@ -10,6 +10,7 @@ import { formatDateRange } from "../../utils/formatDate";
 import { ROUTES } from "../../routePaths";
 import EventRegistrationPanel from "../../components/common/EventRegistrationPanel";
 import EventBooths from "../../components/common/EventBooths";
+import EventSessions from "../../components/common/EventSessions";
 
 const EventDetailPage = () => {
   const { id } = useParams();
@@ -45,6 +46,8 @@ const EventDetailPage = () => {
         <p className="event-detail-text">
           {event.description || "No description has been added yet."}
         </p>
+        <h2 className="event-detail-heading">Schedule</h2>
+        <EventSessions eventId={event._id} />
         <h2 className="event-detail-heading">Booths</h2>
         <EventBooths event={event} />
         <EventRegistrationPanel event={event} />

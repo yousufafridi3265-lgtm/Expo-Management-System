@@ -19,20 +19,39 @@ const Navbar = () => {
     logout();
   };
 
-    // Admin ko sirf apne kaam ke links dikhte hain (public Events/Exhibitors dashboard aur footer se khulte hain).
+  // Admin ko sirf apne kaam ke links dikhte hain (public Events/Exhibitors dashboard aur footer se khulte hain).
   // Baaqi sab ko Events aur Exhibitors, aur apne role ke links
   const renderLinks = () => {
     if (user?.role === "admin") {
       return (
         <>
-          <Link to={ROUTES.adminEvents} className="btn btn-ghost" onClick={closeMenu}>
+          <Link
+            to={ROUTES.adminEvents}
+            className="btn btn-ghost"
+            onClick={closeMenu}
+          >
             Manage events
           </Link>
-          <Link to={ROUTES.adminExhibitors} className="btn btn-ghost" onClick={closeMenu}>
+          <Link
+            to={ROUTES.adminExhibitors}
+            className="btn btn-ghost"
+            onClick={closeMenu}
+          >
             Manage exhibitors
           </Link>
-          <Link to={ROUTES.adminBookings} className="btn btn-ghost" onClick={closeMenu}>
+          <Link
+            to={ROUTES.adminBookings}
+            className="btn btn-ghost"
+            onClick={closeMenu}
+          >
             Bookings
+          </Link>
+          <Link
+            to={ROUTES.adminInbox}
+            className="btn btn-ghost"
+            onClick={closeMenu}
+          >
+            Inbox
           </Link>
         </>
       );
@@ -43,20 +62,50 @@ const Navbar = () => {
         <Link to={ROUTES.events} className="btn btn-ghost" onClick={closeMenu}>
           Events
         </Link>
-        <Link to={ROUTES.exhibitors} className="btn btn-ghost" onClick={closeMenu}>
+        <Link
+          to={ROUTES.exhibitors}
+          className="btn btn-ghost"
+          onClick={closeMenu}
+        >
           Exhibitors
         </Link>
         {user?.role === "attendee" && (
-          <Link to={ROUTES.myRegistrations} className="btn btn-ghost" onClick={closeMenu}>
-            My registrations
+          <>
+            <Link
+              to={ROUTES.myRegistrations}
+              className="btn btn-ghost"
+              onClick={closeMenu}
+            >
+              My registrations
+            </Link>
+            <Link
+              to={ROUTES.mySchedule}
+              className="btn btn-ghost"
+              onClick={closeMenu}
+            >
+              My schedule
+            </Link>
+          </>
+        )}
+        {(user?.role === "attendee" || user?.role === "exhibitor") && (
+          <Link to={ROUTES.messages} className="btn btn-ghost" onClick={closeMenu}>
+            Messages
           </Link>
         )}
         {user?.role === "exhibitor" && (
           <>
-            <Link to={ROUTES.myCompany} className="btn btn-ghost" onClick={closeMenu}>
+            <Link
+              to={ROUTES.myCompany}
+              className="btn btn-ghost"
+              onClick={closeMenu}
+            >
               My company
             </Link>
-            <Link to={ROUTES.myBookings} className="btn btn-ghost" onClick={closeMenu}>
+            <Link
+              to={ROUTES.myBookings}
+              className="btn btn-ghost"
+              onClick={closeMenu}
+            >
               My bookings
             </Link>
           </>

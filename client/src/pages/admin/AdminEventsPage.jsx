@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   FiCalendar,
+  FiClock,
   FiEdit2,
   FiGrid,
   FiMapPin,
@@ -27,7 +28,7 @@ import {
 } from "../../apis/eventApi";
 import { formatDateRange } from "../../utils/formatDate";
 import { notifyError, notifySuccess } from "../../utils/notify";
-import { adminBoothsPath } from "../../routePaths";
+import { adminBoothsPath, adminSessionsPath } from "../../routePaths";
 
 const AdminEventsPage = () => {
   const {
@@ -110,7 +111,17 @@ const AdminEventsPage = () => {
               </p>
             </div>
             <div className="admin-row-actions">
-              <Link to={adminBoothsPath(event._id)} className="btn btn-secondary">
+              <Link
+                to={adminSessionsPath(event._id)}
+                className="btn btn-secondary"
+              >
+                <FiClock aria-hidden="true" />
+                Sessions
+              </Link>
+              <Link
+                to={adminBoothsPath(event._id)}
+                className="btn btn-secondary"
+              >
                 <FiGrid aria-hidden="true" />
                 Booths
               </Link>

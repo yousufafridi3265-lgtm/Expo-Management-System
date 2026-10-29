@@ -25,6 +25,10 @@ const AdminExhibitorsPage = lazy(
 const AdminBoothsPage = lazy(() => import("./pages/admin/AdminBoothsPage"));
 const AdminBookingsPage = lazy(() => import("./pages/admin/AdminBookingsPage"));
 const MyBookingsPage = lazy(() => import("./pages/exhibitor/MyBookingsPage"));
+const MySchedulePage = lazy(() => import("./pages/attendee/MySchedulePage"));
+const AdminSessionsPage = lazy(() => import("./pages/admin/AdminSessionsPage"));
+const MessagesPage = lazy(() => import("./pages/messages/MessagesPage"));
+const AdminInboxPage = lazy(() => import("./pages/admin/AdminInboxPage"));
 
 // App.jsx isi list se Route banata hai.
 // access: "guest" (sirf bina login walay), "auth" (login zaroori), "public" (sab)
@@ -61,6 +65,18 @@ export const appRoutes = [
     access: "auth",
     roles: ["exhibitor"],
   },
+  {
+    path: ROUTES.messages,
+    component: MessagesPage,
+    access: "auth",
+    roles: ["attendee", "exhibitor"],
+  },
+  {
+    path: ROUTES.adminInbox,
+    component: AdminInboxPage,
+    access: "auth",
+    roles: ["admin"],
+  },
   { path: "*", component: NotFoundPage, access: "public" },
   {
     path: ROUTES.myCompany,
@@ -83,6 +99,18 @@ export const appRoutes = [
   {
     path: ROUTES.adminBooths,
     component: AdminBoothsPage,
+    access: "auth",
+    roles: ["admin"],
+  },
+  {
+    path: ROUTES.mySchedule,
+    component: MySchedulePage,
+    access: "auth",
+    roles: ["attendee"],
+  },
+  {
+    path: ROUTES.adminSessions,
+    component: AdminSessionsPage,
     access: "auth",
     roles: ["admin"],
   },

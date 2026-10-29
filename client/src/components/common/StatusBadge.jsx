@@ -15,7 +15,9 @@ const STATUS_TONES = {
   upcoming: "info",
   booked: "info",
   unavailable: "neutral",
-  completed: "neutral"
+  completed: "neutral",
+  session: "info",
+  workshop: "warning",
 };
 
 const StatusBadge = ({ status }) => {
