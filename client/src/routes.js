@@ -5,12 +5,8 @@ import { ROUTES } from "./routePaths";
 // Is se pehli dafa app khulna tez hota hai. App.jsx ka <Suspense> intezar ke dauran PageLoader dikhata hai
 const HomePage = lazy(() => import("./pages/public/HomePage"));
 const ExhibitorsPage = lazy(() => import("./pages/public/ExhibitorsPage"));
-const ExhibitorDetailPage = lazy(
-  () => import("./pages/public/ExhibitorDetailPage"),
-);
-const MyRegistrationsPage = lazy(
-  () => import("./pages/attendee/MyRegistrationsPage"),
-);
+const ExhibitorDetailPage = lazy(() => import("./pages/public/ExhibitorDetailPage"));
+const MyRegistrationsPage = lazy(() => import("./pages/attendee/MyRegistrationsPage"));
 const LoginPage = lazy(() => import("./pages/auth/LoginPage"));
 const RegisterPage = lazy(() => import("./pages/auth/RegisterPage"));
 const EventsPage = lazy(() => import("./pages/public/EventsPage"));
@@ -19,9 +15,7 @@ const DashboardPage = lazy(() => import("./pages/DashboardPage"));
 const NotFoundPage = lazy(() => import("./pages/public/NotFoundPage"));
 const MyCompanyPage = lazy(() => import("./pages/exhibitor/MyCompanyPage"));
 const AdminEventsPage = lazy(() => import("./pages/admin/AdminEventsPage"));
-const AdminExhibitorsPage = lazy(
-  () => import("./pages/admin/AdminExhibitorsPage"),
-);
+const AdminExhibitorsPage = lazy(() => import("./pages/admin/AdminExhibitorsPage"));
 const AdminBoothsPage = lazy(() => import("./pages/admin/AdminBoothsPage"));
 const AdminBookingsPage = lazy(() => import("./pages/admin/AdminBookingsPage"));
 const MyBookingsPage = lazy(() => import("./pages/exhibitor/MyBookingsPage"));

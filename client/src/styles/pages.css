@@ -139,6 +139,8 @@
   .cta-band {
     @apply mx-auto my-10 flex max-w-4xl flex-col items-center gap-4 rounded-xl border border-line bg-card px-4 py-10 text-center;
   }
+
+  
     /* ---------- Events pages ---------- */
   .page-container-wide {
     @apply mx-auto max-w-6xl p-4 sm:p-6;
@@ -291,5 +293,45 @@
     @apply text-sm text-muted;
   }
 
-  
+    /* ---------- List: search, filter, export, pagination ---------- */
+  .list-filters {
+    @apply mb-4 grid gap-4 sm:grid-cols-2;
+  }
+  .list-summary {
+    @apply mb-4 flex flex-wrap items-center justify-between gap-3;
+  }
+  .list-summary-text {
+    @apply text-sm text-muted;
+  }
+  .export-actions {
+    @apply flex flex-wrap gap-2;
+  }
+  .pagination {
+    @apply mt-6 flex flex-wrap items-center justify-center gap-2;
+  }
+  .page-btn {
+    @apply inline-flex h-10 min-w-10 items-center justify-center rounded-lg border border-line bg-card px-3 text-sm font-medium text-fg hover:bg-page disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .page-btn-active {
+    @apply border-brand bg-brand text-on-brand hover:bg-brand-hover;
+  }
+  .page-gap {
+    @apply px-1 text-muted;
+  }
+  .pagination-bar {
+    @apply mt-6 flex flex-wrap items-center justify-center gap-4 sm:justify-between;
+  }
+  .page-size {
+    @apply flex items-center gap-2;
+  }
+  .page-size-label {
+    @apply text-sm text-muted;
+  }
+  .page-size-select {
+    @apply w-auto;
+  }
+  .pagination {
+    @apply flex flex-wrap items-center justify-center gap-2;
+  }
+
 }

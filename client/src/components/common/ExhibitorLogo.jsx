@@ -6,14 +6,14 @@ import { getFileUrl } from "../../utils/fileUrl";
 const ExhibitorLogo = ({ logo, companyName, size = "md" }) => {
   if (!logo) {
     return (
-      <span className={`exhibitor-logo exhibitor-logo-${size} exhibitor-logo-empty`} aria-hidden="true">
+      <span className={`exhibitor-logo exhibitor-logo-${size} exhibitor-logo-empty`}  title={`${companyName}`} aria-hidden="true">
         <FiBriefcase />
       </span>
     );
   }
 
   return (
-    <img src={getFileUrl(logo)} alt={`${companyName} logo`}  className={`exhibitor-logo exhibitor-logo-${size}`} />
+    <img src={getFileUrl(logo)} alt={`${companyName} logo`} title={`${companyName} logo`}  className={`exhibitor-logo exhibitor-logo-${size}`} />
   );
 };
 

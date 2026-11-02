@@ -7,8 +7,7 @@ import { fail, checkValidId, applyFields, failOnDuplicate } from "../utils/fail.
 const BOOKING_STATUSES = ["confirmed", "cancelled"];
 
 // Booking ke saath booth aur event ki zaroori details bhi dikhane ke liye
-const withDetails = (query) =>
-  query.populate("boothId", "boothNumber location size price")
+const withDetails = (query) => query.populate("boothId", "boothNumber location size price")
     .populate("eventId", "name startDate endDate location");
 
 // POST /api/bookings  (sirf exhibitor): booth book karna. Body: { "boothId": "..." }

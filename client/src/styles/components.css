@@ -178,38 +178,93 @@
     @apply text-xs text-muted;
   }
 
-  /* ---------- Navbar ---------- */
+    /* ---------- Navbar ---------- */
   .navbar {
-    @apply sticky top-0 z-40 border-b border-line bg-card;
+    @apply sticky top-0 z-40 border-b border-line bg-card/85 shadow-sm backdrop-blur;
   }
   .navbar-inner {
-    @apply mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3;
+    @apply mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-2.5;
   }
   .navbar-brand {
-    @apply flex items-center gap-2 text-lg font-bold text-fg;
+    @apply flex items-center gap-2 text-lg font-bold tracking-tight text-fg;
   }
   .navbar-logo {
-    @apply h-8 w-8 object-contain;
+    @apply h-9 w-9 object-contain;
   }
   .navbar-desktop {
-    @apply hidden items-center gap-2 md:flex;
+    @apply hidden items-center gap-3 lg:flex;
+  }
+  .navbar-links {
+    @apply flex items-center gap-1;
+  }
+  .navbar-divider {
+    @apply h-6 w-px bg-line;
+  }
+  .navbar-actions {
+    @apply flex items-center gap-2;
   }
   .navbar-mobile-controls {
-    @apply flex items-center gap-1 md:hidden;
+    @apply flex items-center gap-1 lg:hidden;
   }
   .navbar-mobile-menu {
-    @apply flex flex-col gap-2 border-t border-line px-4 py-3 md:hidden;
+    @apply flex flex-col gap-1 border-t border-line px-4 py-3 lg:hidden;
+  }
+  .navbar-mobile-actions {
+    @apply mt-2 flex flex-col gap-2 border-t border-line pt-3;
+  }
+  .navbar-mobile-actions .btn {
+    @apply w-full;
   }
 
-  /* ---------- Footer ---------- */
+  /* Navbar ke links: hover par halka, active page par rang aur mota text */
+  .nav-link {
+    @apply rounded-full px-3 py-2 text-sm font-medium text-muted transition-colors hover:bg-page hover:text-fg;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
+  }
+  .nav-link-active {
+    @apply bg-brand/10 font-semibold text-brand hover:bg-brand/15 hover:text-brand;
+  }
+  .navbar-mobile-menu .nav-link {
+    @apply rounded-lg px-3 py-3 text-base;
+  }
+
+    /* ---------- Footer ---------- */
   .footer {
-    @apply border-t border-line bg-card;
+    @apply mt-10 border-t border-line bg-card;
   }
   .footer-inner {
-    @apply mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-4 py-6 text-sm text-muted sm:flex-row;
+    @apply mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr];
   }
-  .footer-links {
-    @apply flex gap-4;
+  .footer-brand {
+    @apply flex flex-col items-start gap-4 sm:col-span-2 lg:col-span-1;
+  }
+  .footer-brand-link {
+    @apply flex items-center gap-3 text-xl font-bold tracking-tight text-fg;
+  }
+  .footer-logo {
+    @apply h-11 w-11 object-contain;
+  }
+  .footer-about {
+    @apply max-w-sm text-sm leading-relaxed text-muted;
+  }
+  .footer-social {
+    @apply flex flex-wrap gap-2;
+  }
+  .footer-social-link {
+    @apply flex h-10 w-10 items-center justify-center rounded-full border border-line text-lg text-muted transition-colors hover:border-brand hover:bg-brand hover:text-on-brand;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
+  }
+  .footer-column {
+    @apply flex flex-col items-start gap-1;
+  }
+  .footer-heading {
+    @apply mb-2 text-sm font-semibold uppercase tracking-widest text-fg;
+  }
+  .footer-link {
+    @apply py-1.5 text-sm text-muted transition-colors hover:text-brand;
+  }
+  .footer-bottom {
+    @apply mx-auto max-w-6xl border-t border-line px-4 py-5 text-center text-sm text-muted sm:text-left;
   }
 
     /* ---------- Filter chips (events ka status filter) ---------- */
@@ -240,8 +295,8 @@
   .event-meta {
     @apply flex items-center gap-2 text-sm text-muted;
   }
-  .back-link {
-    @apply mb-4 inline-flex items-center gap-2 text-sm font-medium text-brand hover:underline;
+    .back-link {
+    @apply mb-2 inline-flex items-center gap-2 py-2 text-sm font-medium text-brand hover:underline;
   }
   
     /* ---------- ExhibitorLogo, ExhibitorCard ---------- */
@@ -306,7 +361,19 @@
   .admin-row-actions {
     @apply flex flex-wrap gap-2;
   }
-  
+
+
+
+    .navbar-desktop {
+    @apply hidden items-center gap-2 lg:flex;
+  }
+  .navbar-mobile-controls {
+    @apply flex items-center gap-1 lg:hidden;
+  }
+  .navbar-mobile-menu {
+    @apply flex flex-col gap-2 border-t border-line px-4 py-3 lg:hidden;
+  }
+
 
 }
 

@@ -21,20 +21,15 @@ export const AuthProvider = ({ children }) => {
     if (!localStorage.getItem(TOKEN_KEY)) return;
 
     let cancelled = false;
-    getCurrentUser()
-      .then((response) => {
+    getCurrentUser().then((response) => {
         if (!cancelled) setUser(response.data.user);
-      })
-      .catch(() => {
+      }).catch(() => {
         // 401 par api.js token hata chuka hota hai. Server band ho to user login page dekhe ga
-      })
-      .finally(() => {
+      }).finally(() => {
         if (!cancelled) setLoading(false);
       });
 
-    return () => {
-      cancelled = true;
-    };
+    return () => cancelled = true;
   }, []);
 
   // Beech mein token expire ho jaye to logout karo

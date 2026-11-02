@@ -20,12 +20,6 @@ const buildAuthResponse = (user) => ({
   user: formatUser(user)
 });
 
-// Error bhejne ka chota helper: status set karta hai aur error throw karta hai
-// const fail = (res, status, message) => {
-//   res.status(status);
-//   throw new Error(message);
-// };
-
 // POST /api/auth/register
 export const register = async (req, res) => {
   const { name, email, password, role = "attendee" } = req.body;

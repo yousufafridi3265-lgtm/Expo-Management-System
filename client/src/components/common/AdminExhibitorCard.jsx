@@ -13,7 +13,7 @@ const AdminExhibitorCard = ({ exhibitor, busy, onChangeStatus }) => {
   return (
     <article className="card admin-row">
       <div className="admin-row-main">
-        <ExhibitorLogo logo={exhibitor.logo} companyName={exhibitor.companyName} />
+        <ExhibitorLogo  companyName={exhibitor.companyName} />
         <div>
           <div className="admin-row-title-line">
             <h2 className="admin-row-title">{exhibitor.companyName}</h2>

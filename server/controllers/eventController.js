@@ -55,6 +55,11 @@ export const updateEvent = async (req, res) => {
   // Sirf wahi fields badlein jo request mein aayi hain
   applyFields(event, pickEventFields(req.body));
 
+ // Purane events mein createdBy khali hota hai. Edit karne wala admin hi creator likh diya jata hai
+  if (!event.createdBy) {
+    event.createdBy = req.user._id;
+  }
+
   // save() par model ke validation phir se chalte hain
   const updatedEvent = await event.save();
   res.json(updatedEvent);

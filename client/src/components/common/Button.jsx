@@ -12,13 +12,7 @@ const Button = ({
   ...rest
 }) => {
   return (
-    <button
-      type={type}
-      className={`btn btn-${variant} ${className}`}
-      disabled={disabled || loading}
-      aria-busy={loading}
-      {...rest}
-    >
+    <button type={type} className={`btn btn-${variant} ${className}`} disabled={disabled || loading} aria-busy={loading} {...rest} >
       {loading && <Spinner />}
       {children}
     </button>

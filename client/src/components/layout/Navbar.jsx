@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 import logo from "../../assets/logo.jpg";
+import NavItem from "./NavItem";
 import ThemeToggle from "../common/ThemeToggle";
 import Button from "../common/Button";
 import { useAuth } from "../../context/AuthContext";
@@ -19,101 +20,6 @@ const Navbar = () => {
     logout();
   };
 
-  // Admin ko sirf apne kaam ke links dikhte hain (public Events/Exhibitors dashboard aur footer se khulte hain).
-  // Baaqi sab ko Events aur Exhibitors, aur apne role ke links
-  const renderLinks = () => {
-    if (user?.role === "admin") {
-      return (
-        <>
-          <Link
-            to={ROUTES.adminEvents}
-            className="btn btn-ghost"
-            onClick={closeMenu}
-          >
-            Manage events
-          </Link>
-          <Link
-            to={ROUTES.adminExhibitors}
-            className="btn btn-ghost"
-            onClick={closeMenu}
-          >
-            Manage exhibitors
-          </Link>
-          <Link
-            to={ROUTES.adminBookings}
-            className="btn btn-ghost"
-            onClick={closeMenu}
-          >
-            Bookings
-          </Link>
-          <Link
-            to={ROUTES.adminInbox}
-            className="btn btn-ghost"
-            onClick={closeMenu}
-          >
-            Inbox
-          </Link>
-        </>
-      );
-    }
-
-    return (
-      <>
-        <Link to={ROUTES.events} className="btn btn-ghost" onClick={closeMenu}>
-          Events
-        </Link>
-        <Link
-          to={ROUTES.exhibitors}
-          className="btn btn-ghost"
-          onClick={closeMenu}
-        >
-          Exhibitors
-        </Link>
-        {user?.role === "attendee" && (
-          <>
-            <Link
-              to={ROUTES.myRegistrations}
-              className="btn btn-ghost"
-              onClick={closeMenu}
-            >
-              My registrations
-            </Link>
-            <Link
-              to={ROUTES.mySchedule}
-              className="btn btn-ghost"
-              onClick={closeMenu}
-            >
-              My schedule
-            </Link>
-          </>
-        )}
-        {(user?.role === "attendee" || user?.role === "exhibitor") && (
-          <Link to={ROUTES.messages} className="btn btn-ghost" onClick={closeMenu}>
-            Messages
-          </Link>
-        )}
-        {user?.role === "exhibitor" && (
-          <>
-            <Link
-              to={ROUTES.myCompany}
-              className="btn btn-ghost"
-              onClick={closeMenu}
-            >
-              My company
-            </Link>
-            <Link
-              to={ROUTES.myBookings}
-              className="btn btn-ghost"
-              onClick={closeMenu}
-            >
-              My bookings
-            </Link>
-          </>
-        )}
-      </>
-    );
-  };
-
   // Desktop aur mobile dono menu mein yahi buttons dikhte hain, isliye ek hi jagah likhe hain
   const renderActions = () => {
     // Token check ho raha ho to kuch nahi dikhate, warna "Log in" ek pal ke liye chamak jata hai
@@ -122,13 +28,9 @@ const Navbar = () => {
     if (user) {
       return (
         <>
-          <Link
-            to={ROUTES.dashboard}
-            className="btn btn-ghost"
-            onClick={closeMenu}
-          >
+          <NavItem to={ROUTES.dashboard} onClick={closeMenu} end>
             Dashboard
-          </Link>
+          </NavItem>
           <Button variant="secondary" onClick={handleLogout}>
             Log out
           </Button>
@@ -138,16 +40,71 @@ const Navbar = () => {
 
     return (
       <>
-        <Link to={ROUTES.login} className="btn btn-ghost" onClick={closeMenu}>
+        <NavItem to={ROUTES.login} onClick={closeMenu}>
           Log in
-        </Link>
-        <Link
-          to={ROUTES.register}
-          className="btn btn-primary"
-          onClick={closeMenu}
-        >
+        </NavItem>
+        <Link to={ROUTES.register} className="btn btn-primary" onClick={closeMenu}>
           Sign up
         </Link>
+      </>
+    );
+  };
+
+  // Admin ko sirf apne kaam ke links dikhte hain (public Events/Exhibitors dashboard aur footer se khulte hain).
+  // Baaqi sab ko Events aur Exhibitors, aur apne role ke links
+  const renderLinks = () => {
+    if (user?.role === "admin") {
+      return (
+        <>
+          <NavItem to={ROUTES.adminEvents} onClick={closeMenu}>
+            Manage events
+          </NavItem>
+          <NavItem to={ROUTES.adminExhibitors} onClick={closeMenu}>
+            Manage exhibitors
+          </NavItem>
+          <NavItem to={ROUTES.adminBookings} onClick={closeMenu}>
+            Bookings
+          </NavItem>
+          <NavItem to={ROUTES.adminInbox} onClick={closeMenu}>
+            Inbox
+          </NavItem>
+        </>
+      );
+    }
+
+    return (
+      <>
+        <NavItem to={ROUTES.events} onClick={closeMenu}>
+          Events
+        </NavItem>
+        <NavItem to={ROUTES.exhibitors} onClick={closeMenu}>
+          Exhibitors
+        </NavItem>
+        {user?.role === "attendee" && (
+          <NavItem to={ROUTES.myRegistrations} onClick={closeMenu}>
+            My registrations
+          </NavItem>
+        )}
+        {user?.role === "attendee" && (
+          <NavItem to={ROUTES.mySchedule} onClick={closeMenu}>
+            My schedule
+          </NavItem>
+        )}
+        {(user?.role === "attendee" || user?.role === "exhibitor") && (
+          <NavItem to={ROUTES.messages} onClick={closeMenu}>
+            Messages
+          </NavItem>
+        )}
+        {user?.role === "exhibitor" && (
+          <>
+            <NavItem to={ROUTES.myCompany} onClick={closeMenu}>
+              My company
+            </NavItem>
+            <NavItem to={ROUTES.myBookings} onClick={closeMenu}>
+              My bookings
+            </NavItem>
+          </>
+        )}
       </>
     );
   };
@@ -161,9 +118,14 @@ const Navbar = () => {
         </Link>
 
         <div className="navbar-desktop">
-          {renderLinks()}
-          {renderActions()}
-          <ThemeToggle />
+          <nav className="navbar-links" aria-label="Main">
+            {renderLinks()}
+          </nav>
+          <span className="navbar-divider" aria-hidden="true" />
+          <div className="navbar-actions">
+            {renderActions()}
+            <ThemeToggle />
+          </div>
         </div>
 
         <div className="navbar-mobile-controls">
@@ -175,19 +137,15 @@ const Navbar = () => {
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
           >
-            {menuOpen ? (
-              <FiX size={22} aria-hidden="true" />
-            ) : (
-              <FiMenu size={22} aria-hidden="true" />
-            )}
+            {menuOpen ? <FiX size={22} aria-hidden="true" /> : <FiMenu size={22} aria-hidden="true" />}
           </button>
         </div>
       </div>
 
       {menuOpen && (
-        <nav className="navbar-mobile-menu">
+        <nav className="navbar-mobile-menu" aria-label="Main">
           {renderLinks()}
-          {renderActions()}
+          <div className="navbar-mobile-actions">{renderActions()}</div>
         </nav>
       )}
     </header>
